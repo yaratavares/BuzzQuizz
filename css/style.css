@@ -1,0 +1,142 @@
+
+body{
+    font-family: Roboto, sans-serif;
+}
+
+/* header fixo */
+#header {
+    height: 69px;
+    width: 100%;
+
+    background-color:#EC362D;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+#header span{
+    font-weight: 700;
+    color: #FFFFFF;
+    font-size: 37px;
+}
+
+/* container tela incial */
+#telaInicio {
+    height: 100vh;
+
+    margin-top: 69px;
+    background: #FAFAFA;
+}
+
+#telaInicio.hidden {
+    display: none;
+    visibility: hidden;
+}
+
+#telaInicio h2 {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 14px;
+}
+
+#telaInicio img{
+    height: 100%;
+    width: 100%;
+}
+
+/* parte da tela 1 que pode ter ou não quizes seus */
+#telaInicio .section1{
+    padding: 31px 0 14px 18px;
+}
+
+#telaInicio .criarQuiz {
+    height: 181px;
+    width: 340px;
+
+    border-radius: 5px;
+    border: 1px dashed #D5D5D5;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#telaInicio .criarQuiz p {
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    text-justify: distribute;
+    margin-bottom: 34px;
+
+    color: #B9B9B9;
+}
+
+#telaInicio .criarQuiz button {
+    background: #FAFAFA;
+    font-size: 21px;
+    color: #EC362D;
+
+    border: 1px dashed #EC362D;
+    border-radius: 50px;
+}
+
+#telaInicio .criarQuiz.comQuiz {
+    visibility: hidden;
+    display: none;
+}
+
+/* tudo que se refere a padronização da listagem de quiz */
+#telaInicio .section2{
+    margin: 21px 0 14px 18px;
+}
+
+#telaInicio .todosQuizes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* estilos de cada quiz */
+#telaInicio .quiz{
+    height: 181px;
+    width: 340px;
+    margin-bottom: 14px;
+    margin-right: 15px;
+   
+
+    position: relative;
+}
+
+#telaInicio .quiz .degrade {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
+    position: absolute;
+}
+
+#telaInicio .quiz img {
+    border-radius: 5px;
+}
+
+#telaInicio .quiz .tittleQuiz h3{
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 22px;
+    color: white;
+    text-align: center;
+
+    position: absolute;
+    z-index: 0;
+
+    bottom: 7px;
+    left: 18px;
+    right: 18px;
+}

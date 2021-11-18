@@ -3,20 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name= "description" content="Bate-papo UOL">
-    <meta name= "keywords" content="Javascript, HTML, CSS, Bate-papo, UOL, mensagens">
-    <meta name= "author" content="Yara Tavares">
+    <meta name= "description" content="Jogos tipo quiz">
+    <meta name= "keywords" content="Javascript, HTML, CSS, Quizz, perguntas, respostas, testes">
+    <meta name= "author" content="Yara Tavares e Carolina Dias">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
    
-    <title>UOL</title>
+    <title>BuzzQuizz</title>
 </head>
 <body>
+    <header id="header">
+        <span>BuzzQuizz</span>
+    </header>
+
+    <div id="telaInicio" class="container hidden">
+        <div class="section1">
+            <div class="criarQuiz comQuiz">
+                <p>Você não criou nenhum<br>quizz ainda :(</p>
+                <button>Criar Quizz</button>
+            </div>
+
+            <h2>Seus Quizzes</h2>
+
+            <div class="seusQuizes">
+                <div class="quiz quizSeus">
+                    <div class="degrade">
+                    </div>
+                    <img src="https://s2.glbimg.com/ntBcLkClNMsq3vRlJjYUEE5Gyd0=/e.glbimg.com/og/ed/f/original/2019/11/27/simpsons.jpg"/>
+                    <div class="tittleQuiz">
+                        <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section2">
+            <h2>Todos os Quizzes</h2>
+            <div class="todosQuizes">
+                <div class="quiz quizTodos">
+                    <div class="degrade">
+                    </div>
+                    <img src="https://s2.glbimg.com/ntBcLkClNMsq3vRlJjYUEE5Gyd0=/e.glbimg.com/og/ed/f/original/2019/11/27/simpsons.jpg"/>
+                    <div class="tittleQuiz">
+                        <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
+                    </div>
+                </div>
+                <div class="quiz quizTodos">
+                    <div class="degrade">
+                    </div>
+                    <img src="https://s2.glbimg.com/ntBcLkClNMsq3vRlJjYUEE5Gyd0=/e.glbimg.com/og/ed/f/original/2019/11/27/simpsons.jpg"/>
+                    <div class="tittleQuiz">
+                        <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <script src="main.js"></script>
 </body>
