@@ -29,10 +29,27 @@
                 <p>Você não criou nenhum<br>quizz ainda :(</p>
                 <button>Criar Quizz</button>
             </div>
-
-            <h2>Seus Quizzes</h2>
-
+            <div class="seusQuizes divisor">
+                <h2>Seus Quizzes</h2>
+                <ion-icon name="add-circle"></ion-icon>
+            </div>
             <div class="seusQuizes">
+                <div class="quiz quizSeus">
+                    <div class="degrade">
+                    </div>
+                    <img src="https://s2.glbimg.com/ntBcLkClNMsq3vRlJjYUEE5Gyd0=/e.glbimg.com/og/ed/f/original/2019/11/27/simpsons.jpg"/>
+                    <div class="tittleQuiz">
+                        <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
+                    </div>
+                </div>
+                <div class="quiz quizSeus">
+                    <div class="degrade">
+                    </div>
+                    <img src="https://s2.glbimg.com/ntBcLkClNMsq3vRlJjYUEE5Gyd0=/e.glbimg.com/og/ed/f/original/2019/11/27/simpsons.jpg"/>
+                    <div class="tittleQuiz">
+                        <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
+                    </div>
+                </div>
                 <div class="quiz quizSeus">
                     <div class="degrade">
                     </div>
@@ -63,24 +80,53 @@
                         <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
                     </div>
                 </div>
+                <div class="quiz quizTodos">
+                    <div class="degrade">
+                    </div>
+                    <img src="https://s2.glbimg.com/ntBcLkClNMsq3vRlJjYUEE5Gyd0=/e.glbimg.com/og/ed/f/original/2019/11/27/simpsons.jpg"/>
+                    <div class="tittleQuiz">
+                        <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
-
-    <script src="main.js"></script>
-</body>
-
-<!--Html segunda page-->
-<main class="pageQuizz">
-    <header>
-        <h1>BuzzQuizz</h1>
-    </header>
-
-    <div class="title">
-        <h2>Teste Bla Bla Bla</h2>
-    </div>
-
-    <div class="quizzLayout">
+    
+    <!--Html segunda page-->
+    <main class="pageQuizz hidden">
+        <header>
+            <h1>BuzzQuizz</h1>
+        </header>
+        
+        <div class="title">
+            <h2>Teste Bla Bla Bla</h2>
+        </div>
+        
+        <div class="quizzLayout">
+            <div class="quizzBoxes">
+                <div class="question">
+                    <h3>Qual Joaninha você prefere?</h3>
+                </div>
+                <div class="answers">
+                    <div class="answerOne option">
+                        <img src="hamburguer.jpg">
+                        <p>Hamburguer</p>
+                </div>
+                <div class="answerTwo option">
+                    <img src="hamburguer.jpg">
+                    <p>Hamburguer</p>
+                </div>
+                <div class="answerThree option">
+                    <img src="hamburguer.jpg">
+                    <p>Hamburguer</p>
+                </div>
+                <div class="answerFour option">
+                    <img src="hamburguer.jpg">
+                    <p>Hamburguer</p>
+                </div>
+            </div>
+        </div>
+        
         <div class="quizzBoxes">
             <div class="question">
                 <h3>Qual Joaninha você prefere?</h3>
@@ -104,31 +150,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="quizzBoxes">
-            <div class="question">
-                <h3>Qual Joaninha você prefere?</h3>
-            </div>
-            <div class="answers">
-                <div class="answerOne option">
-                    <img src="hamburguer.jpg">
-                    <p>Hamburguer</p>
-                </div>
-                <div class="answerTwo option">
-                    <img src="hamburguer.jpg">
-                    <p>Hamburguer</p>
-                </div>
-                <div class="answerThree option">
-                    <img src="hamburguer.jpg">
-                    <p>Hamburguer</p>
-                </div>
-                <div class="answerFour option">
-                    <img src="hamburguer.jpg">
-                    <p>Hamburguer</p>
-                </div>
-            </div>
-        </div>
-
+        
         <div class="quizzBoxes">
             <div class="question">
                 <h3>Qual Joaninha você prefere?</h3>
@@ -163,14 +185,36 @@
             </div>
         </div>
     </div>
-
+    
     <footer class="buttonsQuizz">
         <H4 class="buttonRestart">Reiniciar Quizz</H4>
         <H3 class="backHome">Voltar para Home</H3>
     </footer>
-    </div>
+</div>
 </main>
 
-<!--FIM Html segunda page-->
+<!-- terceira pagina -->
+    <div id="criarQuizzes" class="container">
+        <section class="section1">
+            <div class="titulo">
+                <p>Comece pelo começo</p>
+            </div>
+            <div class="containerInput">
+                <input type="text" placeholder="Título do seu quizz"/>
+                <input type="text" placeholder="URL da imagem do seu quizz"/>
+                <input type="text" placeholder="Quantidade de perguntas do quizz"/>
+                <input type="text" placeholder="Quantidade de níveis do quizz"/>
+            </div>
+            <div class="button">
+                <button>
+                    Prosseguir pra criar perguntas
+                </button>
+            </div>
+        </section>
+    </div>
 
+<!--FIM Html segunda page-->
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+<script src="main.js"></script>
+</body>
 </html>
