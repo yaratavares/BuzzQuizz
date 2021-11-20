@@ -49,7 +49,6 @@ function openQuizz(answers) {
 
     elementBackground.style.backgroundImage = `url(${answers.data.image})`;
     elementTitle.innerHTML = answers.data.title;
-    console.log(answers.data.questions);
 
 
     for (let i = 0; i < answers.data.questions.length; i++) {
@@ -101,7 +100,6 @@ function selectAnswer(option) {
 
 
     for (let i = 0; i < numbersAll.length; i++) {
-        console.log(numbersAll[i]);
 
         if (numbersAll[i] !== option) {
             numbersAll[i].classList.add("whitish");
@@ -114,6 +112,11 @@ function selectAnswer(option) {
             numbersAll[i].querySelector("p").classList.add("wrong");
         }
     }
+    let father = option.parentNode;
+    let brother = father.parentNode.nextSibling;
 
-
+    if (brother !== null) {
+        setTimeout(() => { brother.scrollIntoView() }, 2000);
+    }
 }
+
