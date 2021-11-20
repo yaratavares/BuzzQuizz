@@ -85,7 +85,7 @@
     /* tudo que se refere a padronização da listagem de quiz */
     
     #telaInicio .section2 {
-        margin: 21px 0 14px 18px;
+        margin-right: 14px;
     }
     
     #telaInicio .todosQuizes {
@@ -395,7 +395,7 @@
     /* container tela incial */
     
     #telaInicio {
-        height: 100vh;
+        height: 100%;
         margin-top: 69px;
         background: #FAFAFA;
     }
@@ -536,7 +536,7 @@
         #telaInicio .seusQuizes ion-icon {
             margin-left: 17px;
         }
-        #telaInicio h2 {
+        #telaInicio .seusQuizes h2 {
             margin-bottom: 0;
         }
     }

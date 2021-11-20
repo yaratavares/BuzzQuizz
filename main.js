@@ -1,3 +1,40 @@
+//modificacao da DOM pagina 1
+
+const promisse = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
+
+promisse.then(takeAllQuiz);
+
+promisse.catch(function (response){
+    console.log(response);
+})
+
+function takeAllQuiz (response){
+    console.log(response.data);
+    const elementAllQuizzes = document.querySelector(".section2 .todosQuizes");
+    console.log(elementAllQuizzes);
+    for(let i=0; i< response.data.length ; i++){
+        elementAllQuizzes.innerHTML += 
+            `<div class="quiz quizTodos" >
+                <div class="degrade" onclick="clickQuiz(${response.data[i].id})">
+                </div>
+                <img src="${response.data[i].image}" />
+                <div class="tittleQuiz">
+                    <h3>${response.data[i].title}</h3>
+                </div>
+            </div>`
+    }
+}
+
+function clickQuiz (idQuiz){
+    const elementTelaInicio = document.getElementById("telaInicio");
+    const elementPageQuiz = document.querySelector(".pageQuizz");
+    elementTelaInicio.classList.add("hidden");
+    elementPageQuiz.classList.remove("hidden");
+
+    searchQuizz(idQuiz);
+}
+
+// modificacao da DOM pagina 2
 function searchQuizz(idQuizz) {
     let quizzes = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + idQuizz);
     quizzes.then(openQuizz);
