@@ -516,6 +516,10 @@
         right: 18px;
     }
     
+    .blocked {
+        pointer-events: none;
+    }
+    
     @media (min-width: 1000px) {
         #telaInicio .section1,
         #telaInicio .section2 {

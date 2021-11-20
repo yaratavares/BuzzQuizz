@@ -10,9 +10,6 @@ function openQuizz(answers) {
     let elementBackground = document.querySelector(".title");
     let elementQuestions = document.querySelector(".allQuestions");
 
-
-
-
     elementBackground.style.backgroundImage = `url(${answers.data.image})`;
     elementTitle.innerHTML = answers.data.title;
     console.log(answers.data.questions);
@@ -31,14 +28,22 @@ function openQuizz(answers) {
         arrayAnswers.sort(shuffle);
 
         for (let x = 0; x < arrayAnswers.length; x++) {
-            elementBoxes[i].innerHTML += `
-    <div class="answer${x+1} option">
+
+            if (arrayAnswers[x].isCorrectAnswer) {
+                elementBoxes[i].innerHTML += `
+    <div class="answer${x+1} option true"  onclick="selectAnswer(this)">
         <img src=${arrayAnswers[x].image}>
         <p>${arrayAnswers[x].text}</p>
     </div>`
+            } else {
+                elementBoxes[i].innerHTML += `
+    <div class="answer${x+1} option false"  onclick="selectAnswer(this)">
+        <img src=${arrayAnswers[x].image}>
+        <p>${arrayAnswers[x].text}</p>
+    </div>`
+            }
         }
     }
-
     let elementColor = document.querySelectorAll(".question");
 
     for (let i = 0; i < answers.data.questions.length; i++) {
@@ -51,4 +56,27 @@ function openQuizz(answers) {
 
 function shuffle() {
     return Math.random() - 0.5;
+}
+
+function selectAnswer(option) {
+    const numberAnswers = option.parentNode;
+    const numbersAll = numberAnswers.querySelectorAll(".option");
+
+
+    for (let i = 0; i < numbersAll.length; i++) {
+        console.log(numbersAll[i]);
+
+        if (numbersAll[i] !== option) {
+            numbersAll[i].classList.add("whitish");
+        }
+        numbersAll[i].classList.add("blocked");
+        if (numbersAll[i].classList.contains("true")) {
+            numbersAll[i].querySelector("p").classList.add("right");
+
+        } else {
+            numbersAll[i].querySelector("p").classList.add("wrong");
+        }
+    }
+
+
 }
