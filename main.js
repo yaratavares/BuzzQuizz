@@ -9,9 +9,7 @@ promisse.catch(function (response){
 })
 
 function takeAllQuiz (response){
-    console.log(response.data);
     const elementAllQuizzes = document.querySelector(".section2 .todosQuizes");
-    console.log(elementAllQuizzes);
     for(let i=0; i< response.data.length ; i++){
         elementAllQuizzes.innerHTML += 
             `<div class="quiz quizTodos" >
@@ -120,3 +118,20 @@ function selectAnswer(option) {
     }
 }
 
+
+//criacao do quiz
+let quiz = {};
+function createQuiz (){
+    const elementTelaInicio = document.getElementById("telaInicio");
+    const elementCreateQuiz = document.querySelector("#criarQuizzes .section1");
+    elementTelaInicio.classList.add("hidden");
+    elementCreateQuiz.classList.remove("hidden");
+}
+
+function createSection1(){
+    const title = document.getElementById('title');
+    const image = document.getElementById('imageQuiz')
+
+    quiz = {title: title.value, image: image.value };
+    console.log(quiz);
+}

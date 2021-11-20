@@ -25,15 +25,15 @@
 
     <div id="telaInicio" class="container">
         <div class="section1">
-            <div class="criarQuiz comQuiz">
+            <div class="criarQuiz">
                 <p>Você não criou nenhum<br>quizz ainda :(</p>
-                <button>Criar Quizz</button>
+                <button onclick="createQuiz()">Criar Quizz</button>
             </div>
-            <div class="seusQuizes divisor">
+            <div class="divisor semQuiz">
                 <h2>Seus Quizzes</h2>
-                <ion-icon name="add-circle"></ion-icon>
+                <ion-icon name="add-circle" onclick="createQuiz()"></ion-icon>
             </div>
-            <div class="seusQuizes">
+            <div class="seusQuizes semQuiz">
                 <div class="quiz quizSeus">
                     <div class="degrade">
                     </div>
@@ -62,10 +62,12 @@
         </div>
 
         <section class="section2">
-            <h2>Todos os Quizzes</h2>
-            <div class="todosQuizes">
-               <!-- contem todos os quizzes -->
+            <div class="divisor">
+                <h2>Todos os Quizzes</h2>
             </div>
+                <div class="todosQuizes">
+                    <!-- contem todos os quizzes -->
+                </div>
         </section>
     </div>
 
@@ -114,12 +116,12 @@
                 <p>Comece pelo começo</p>
             </div>
             <div class="containerInput">
-                <input type="text" placeholder="Título do seu quizz" />
-                <input type="text" placeholder="URL da imagem do seu quizz" />
-                <input type="text" placeholder="Quantidade de perguntas do quizz" />
-                <input type="text" placeholder="Quantidade de níveis do quizz" />
+                <input type="text" id="title" placeholder="Título do seu quizz" />
+                <input type="text" id= "imageQuiz" placeholder="URL da imagem do seu quizz" />
+                <input type="text" id= "qtdP" placeholder="Quantidade de perguntas do quizz" />
+                <input type="text" id= "qtdN" placeholder="Quantidade de níveis do quizz" />
             </div>
-            <div class="button">
+            <div class="button" onclick="createSection1()";>
                 <button>
                     Prosseguir pra criar perguntas
                 </button>
