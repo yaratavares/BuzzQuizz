@@ -192,10 +192,10 @@
     </footer>
 </div>
 </main>
-
-<!-- terceira pagina -->
-    <div id="criarQuizzes" class="container">
-        <section class="section1">
+<!-- 
+ terceira pagina -->
+    <div id="criarQuizzes" class="container"> 
+        <section class="section1 hidden">
             <div class="titulo">
                 <p>Comece pelo começo</p>
             </div>
@@ -211,6 +211,94 @@
                 </button>
             </div>
         </section>
+
+        <section class="section2 hidden">
+            <div class="titulo">
+                <p>Crie suas perguntas</p>
+            </div>
+            <div class="containerInput">
+                <p>Pergunta 1</p>
+                <input type="text" placeholder="Texto da pergunta"/>
+                <input type="text" placeholder="Cor de fundo da pergunta"/>
+                <p>Resposta correta</p>
+                <input type="text" placeholder="Resposta correta"/>
+                <input type="text" placeholder="URL da imagem"/>
+                <p>Respostas incorretas</p>
+                <input type="text" placeholder="Resposta incorreta 1"/>
+                <input type="text" placeholder="URL da imagem 1"/>
+                <br>
+                <input type="text" placeholder="Resposta incorreta 2"/>
+                <input type="text" placeholder="URL da imagem 2"/>
+                <br>
+                <input type="text" placeholder="Resposta incorreta 3"/>
+                <input type="text" placeholder="URL da imagem 3"/>
+            </div>
+            <div class="outrasPerguntas">
+                <p>Pergunta 2</p>
+                <ion-icon name="create-outline"></ion-icon>
+            </div>
+            <div class="outrasPerguntas">
+                <p>Pergunta 3</p>
+                <ion-icon name="create-outline"></ion-icon>
+            </div>
+            <div class="button">
+                <button>
+                    Prosseguir pra criar níveis
+                </button>
+            </div>
+        </section>
+
+        <section class="section3 hidden">
+            <div class="titulo">
+                <p>Agora, decida os níveis!</p>
+            </div>
+            <div class="containerInput">
+                <p>Nível 1</p>
+                <input type="text" placeholder="Título do nível"/>
+                <input type="text" placeholder="% de acerto mínima"/>
+                <input type="text" placeholder="URL da imagem do nível"/>
+                <input type="text" value="" placeholder="Descrição do nível"/>
+            </div>
+            <div class="outrasPerguntasNiveis">
+                <p>Nível 2</p>
+                <ion-icon name="create-outline"></ion-icon>
+            </div>
+            <div class="outrasPerguntasNiveis">
+                <p>Nível 3</p>
+                <ion-icon name="create-outline"></ion-icon>
+            </div>
+            <div class="button">
+                <button>
+                    Finalizar Quizz
+                </button>
+            </div>
+        </section>
+
+        <div class="section4 hidden">
+            <div class="titulo">
+                <p>Seu quizz está pronto!</p>
+            </div>
+            <div class="quizPronto">
+                <div class="quiz">
+                    <div class="degrade">
+                    </div>
+                    <img src="https://s2.glbimg.com/ntBcLkClNMsq3vRlJjYUEE5Gyd0=/e.glbimg.com/og/ed/f/original/2019/11/27/simpsons.jpg"/>
+                    <div class="tittleQuiz">
+                        <h3>Acerte os personagens corretos dos Simpsons e prove seu amor!</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="button">
+                <button>
+                    Acessar Quizz
+                </button>
+            </div>
+            <div class="buttonHome">
+                <button>
+                    Voltar pra home
+                </button>
+            </div>
+        </div>
     </div>
 
 <!--FIM Html segunda page-->
