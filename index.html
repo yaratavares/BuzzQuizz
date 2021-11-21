@@ -65,9 +65,9 @@
             <div class="divisor">
                 <h2>Todos os Quizzes</h2>
             </div>
-                <div class="todosQuizes">
-                    <!-- contem todos os quizzes -->
-                </div>
+            <div class="todosQuizes">
+                <!-- contem todos os quizzes -->
+            </div>
         </section>
     </div>
 
@@ -89,39 +89,39 @@
 
             </div>
 
-            <div class="result">
-                <div class="resultTitle">
+            <div class="result hidden">
+                <!-- <div class="resultTitle">
                     <h3>Você é burro cara</h3>
                 </div>
                 <div class="resultText">
                     <img src="hamburguer.jpg">
                     <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</p>
                 </div>
+            </div> -->
             </div>
-        </div>
 
-        <footer class="buttonsQuizz">
-            <H4 class="buttonRestart">Reiniciar Quizz</H4>
-            <H3 class="backHome">Voltar para Home</H3>
-        </footer>
+            <footer class="buttonsQuizz">
+                <H4 class="buttonRestart" onclick="restartQuizz()">Reiniciar Quizz</H4>
+                <H3 class="backHome" onclick="returnHome()">Voltar para Home</H3>
+            </footer>
         </div>
     </main>
     <!--FIM Html segunda page-->
 
     <!-- 
  terceira pagina -->
-    <div id="criarQuizzes" class="container ">
+    <div id="criarQuizzes" class="container hidden">
         <section class="section1 hidden">
             <div class="titulo">
                 <p>Comece pelo começo</p>
             </div>
             <div class="containerInput">
                 <input type="text" id="title" placeholder="Título do seu quizz" />
-                <input type="text" id= "imageQuiz" placeholder="URL da imagem do seu quizz" />
-                <input type="text" id= "qtdP" placeholder="Quantidade de perguntas do quizz" />
-                <input type="text" id= "qtdN" placeholder="Quantidade de níveis do quizz" />
+                <input type="text" id="imageQuiz" placeholder="URL da imagem do seu quizz" />
+                <input type="text" id="qtdP" placeholder="Quantidade de perguntas do quizz" />
+                <input type="text" id="qtdN" placeholder="Quantidade de níveis do quizz" />
             </div>
-            <div class="button" onclick="createSection1()";>
+            <div class="button" onclick="createSection1()" ;>
                 <button>
                     Prosseguir pra criar perguntas
                 </button>
