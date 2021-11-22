@@ -23,7 +23,7 @@
         <span>BuzzQuizz</span>
     </header>
 
-    <div id="telaInicio" class="container hidden">
+    <div id="telaInicio" class="container">
         <div class="section1">
             <div class="criarQuiz">
                 <p>Você não criou nenhum<br>quizz ainda :(</p>
@@ -103,13 +103,8 @@
 
     <!-- 
  terceira pagina -->
-<<<<<<< HEAD
-    <div id="criarQuizzes" class="container ">
-        <section class="section1">
-=======
-    <div id="criarQuizzes" class="container hidden">
+    <div id="criarQuizzes" class="container">
         <section class="section1 hidden">
->>>>>>> 8e972631f5086c0af792c68bb73120d2fe95c3c8
             <div class="titulo">
                 <p>Comece pelo começo</p>
             </div>
@@ -119,12 +114,9 @@
                 <input type="text" id="qtdP" placeholder="Quantidade de perguntas do quizz" />
                 <input type="text" id="qtdN" placeholder="Quantidade de níveis do quizz" />
             </div>
-<<<<<<< HEAD
-            <div class="button" onclick="saveSection1()">
-=======
-            <div class="button" onclick="createSection1()" ;>
->>>>>>> 8e972631f5086c0af792c68bb73120d2fe95c3c8
-                <button>
+
+            <div class="button">
+                <button onclick="saveSection1()">
                     Prosseguir pra criar perguntas
                 </button>
             </div>
@@ -148,23 +140,11 @@
             <div class="titulo">
                 <p>Agora, decida os níveis!</p>
             </div>
-            <div class="containerInput">
-                <p>Nível 1</p>
-                <input type="text" placeholder="Título do nível" />
-                <input type="text" placeholder="% de acerto mínima" />
-                <input type="text" placeholder="URL da imagem do nível" />
-                <input type="text" value="" placeholder="Descrição do nível" />
-            </div>
-            <div class="outrasPerguntasNiveis">
-                <p>Nível 2</p>
-                <ion-icon name="create-outline"></ion-icon>
-            </div>
-            <div class="outrasPerguntasNiveis">
-                <p>Nível 3</p>
-                <ion-icon name="create-outline"></ion-icon>
+            <div class= "containerNiveis">
+                <!-- contem os inputs da secao -->
             </div>
             <div class="button">
-                <button>
+                <button onclick="saveSection3()">
                     Finalizar Quizz
                 </button>
             </div>
