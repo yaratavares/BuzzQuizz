@@ -23,7 +23,7 @@
         <span>BuzzQuizz</span>
     </header>
 
-    <div id="telaInicio" class="container">
+    <div id="telaInicio" class="container hidden">
         <div class="section1">
             <div class="criarQuiz">
                 <p>Você não criou nenhum<br>quizz ainda :(</p>
@@ -111,7 +111,7 @@
     <!-- 
  terceira pagina -->
     <div id="criarQuizzes" class="container ">
-        <section class="section1 hidden">
+        <section class="section1">
             <div class="titulo">
                 <p>Comece pelo começo</p>
             </div>
@@ -121,7 +121,7 @@
                 <input type="text" id= "qtdP" placeholder="Quantidade de perguntas do quizz" />
                 <input type="text" id= "qtdN" placeholder="Quantidade de níveis do quizz" />
             </div>
-            <div class="button" onclick="createSection1()";>
+            <div class="button" onclick="saveSection1()">
                 <button>
                     Prosseguir pra criar perguntas
                 </button>
@@ -132,33 +132,11 @@
             <div class="titulo">
                 <p>Crie suas perguntas</p>
             </div>
-            <div class="containerInput">
-                <p>Pergunta 1</p>
-                <input type="text" placeholder="Texto da pergunta" />
-                <input type="text" placeholder="Cor de fundo da pergunta" />
-                <p>Resposta correta</p>
-                <input type="text" placeholder="Resposta correta" />
-                <input type="text" placeholder="URL da imagem" />
-                <p>Respostas incorretas</p>
-                <input type="text" placeholder="Resposta incorreta 1" />
-                <input type="text" placeholder="URL da imagem 1" />
-                <br>
-                <input type="text" placeholder="Resposta incorreta 2" />
-                <input type="text" placeholder="URL da imagem 2" />
-                <br>
-                <input type="text" placeholder="Resposta incorreta 3" />
-                <input type="text" placeholder="URL da imagem 3" />
-            </div>
-            <div class="outrasPerguntas">
-                <p>Pergunta 2</p>
-                <ion-icon name="create-outline"></ion-icon>
-            </div>
-            <div class="outrasPerguntas">
-                <p>Pergunta 3</p>
-                <ion-icon name="create-outline"></ion-icon>
+            <div class="containerQuestions">
+                <!-- contem os inputs da seçao -->
             </div>
             <div class="button">
-                <button>
+                <button onclick="saveSection2()">
                     Prosseguir pra criar níveis
                 </button>
             </div>
