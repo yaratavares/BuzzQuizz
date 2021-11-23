@@ -186,9 +186,11 @@ function selectAnswer(option) {
 //função para reiniciar o quizz na pagina 2
 
 function restartQuizz() {
-    const showResult = document.querySelector(".result");
-    searchQuizz(ids);
-    showResult.classList.add("hidden");
+
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/` + ids);
+    promise.then(openQuizz);
+    document.querySelector(".allQuestions").innerHTML = "";
+    document.querySelector(".result").innerHTML = "";
     window.scrollTo(0, 0);
     percentual = 0;
 }
@@ -200,6 +202,9 @@ function returnHome() {
     const elementPageQuiz = document.querySelector(".pageQuizz");
     elementTelaInicio.classList.remove("hidden");
     elementPageQuiz.classList.add("hidden");
+    setTimeout(function() {
+        document.location.reload(true);
+    }, 1000);
 
     takeAllQuiz(promise);
     window.scrollTo(0, 0);
@@ -504,7 +509,19 @@ function successQuizz(response) {
 //ativada ao clicar no botão "acessar quizz" da pagina 3 após ele ser criado
 
 function openMyQuizz(ids) {
-    searchQuizz(ids);
+    console.log(ids);
+    let quizzes = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + ids);
+    quizzes.then(openQuizz);
+
+    const endCreation = document.querySelector("#criarQuizzes .section4");
+    const openMyPage = document.querySelector(".pageQuizz");
+    const result = document.querySelector(".result");
+
+    endCreation.classList.add("hidden");
+    openMyPage.classList.remove("hidden");
+    result.classList.add("hidden");
+
+
 }
 
 //reinicia e atualiza o servidor para voltar com a pagina 1 ja com o quiz recem feito
@@ -512,6 +529,7 @@ function openMyQuizz(ids) {
 function reload() {
     const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
     const elementTelaInicio = document.getElementById("telaInicio");
+
     elementCreateQuiz.classList.add("hidden");
     elementTelaInicio.classList.remove("hidden");
 
