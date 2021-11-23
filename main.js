@@ -17,7 +17,7 @@ function takeAllQuiz(response) {
     idUsersQuizzesString = localStorage.getItem("id");
     idUsersQuizzes = JSON.parse(idUsersQuizzesString);
 
-    for (let i = 0, j=0; i < response.data.length; i++) {
+    for (let i = 0, j = 0; i < response.data.length; i++) {
 
         if (idUsersQuizzes.includes(response.data[i].id)) {
             elementSeusQuizzes.innerHTML +=
@@ -35,7 +35,7 @@ function takeAllQuiz(response) {
                 elementDivisor.classList.remove('semQuiz');
                 elementSeusQuizzes.classList.remove('semQuiz');
                 elementCriarQuiz.classList.add('comQuiz');
-                j=1;
+                j = 1;
             }
         } else {
             elementAllQuizzes.innerHTML +=
@@ -53,12 +53,12 @@ function takeAllQuiz(response) {
 }
 
 function clickQuiz(idQuiz) {
-    
+
     const elementTelaInicio = document.getElementById("telaInicio");
     const elementPageQuiz = document.querySelector(".pageQuizz");
     elementTelaInicio.classList.add("hidden");
     elementPageQuiz.classList.remove("hidden");
-    
+
     searchQuizz(idQuiz);
 }
 
@@ -156,7 +156,7 @@ function selectAnswer(option) {
 
     }
     let father = option.parentNode;
-    let brother = father.parentNode.nextSibling;
+    let brother = father.parentNode.parentNode.nextSibling;
 
     if (brother !== null) {
         setTimeout(() => { brother.scrollIntoView() }, 2000);
@@ -194,6 +194,7 @@ function restartQuizz() {
     promise.then(openQuizz);
     document.querySelector(".allQuestions").innerHTML = "";
     document.querySelector(".result").innerHTML = "";
+    document.querySelector(".result").classList.add("hidden");
     window.scrollTo(0, 0);
     percentual = 0;
 }
@@ -314,15 +315,15 @@ function saveSection2() {
     color = color.toUpperCase();
     let valid3 = true;
 
-    for (let i=0; i < color.length ; i++){
-        if (color.includes(letters[i])){
+    for (let i = 0; i < color.length; i++) {
+        if (color.includes(letters[i])) {
             valid3 = false;
-        } 
+        }
     }
 
     if (question.length < 20 || !(color.includes('#')) || !(color.length === 7) || answerCorrect === null || answerWrong1 === null || !valid1 || !valid2 || !valid3) {
         alert('Preenchar os dados corretamente');
-        
+
     } else {
         questions.push({ title: question, color });
         answer.push({ text: answerCorrect, image: urlCorrect, isCorrectAnswer: true });
@@ -404,7 +405,7 @@ function saveSection3() {
 
     const valid1 = checkURL(image);
     let valid2 = true;
-    if (i === 1 && minValue !== '0'){
+    if (i === 1 && minValue !== '0') {
         valid2 = false;
     }
 
@@ -549,8 +550,7 @@ function openMyQuizz(ids) {
 
 
 //tela de carregamento
-function carregando(){
+function carregando() {
     const elementoCarregamento = document.querySelector(".telaCarregamento");
     elementoCarregamento.classList.toggle('hidden');
 }
-
