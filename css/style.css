@@ -162,7 +162,7 @@
     
     .pageQuizz {
         font-family: 'Roboto', sans-serif;
-        width: 100vw;
+        width: 100%;
     }
     
     .pageQuizz h1 {
@@ -216,7 +216,7 @@
     
     .quizzBoxes {
         display: flex;
-        flex-wrap: wrap;
+        /* flex-wrap: wrap; */
         flex-direction: column;
         height: 676px;
         width: 759px;
@@ -253,6 +253,9 @@
         font-weight: 700;
         line-height: 23px;
         margin-top: 7px;
+        word-wrap: break-word;
+        word-break: break-all;
+        width: 329px;
     }
     
     .answers {
@@ -343,6 +346,9 @@
         font-weight: 700;
         line-height: 25px;
         color: #484848;
+        word-wrap: break-word;
+        word-break: break-all;
+        width: 340px;
     }
     
     .option {
