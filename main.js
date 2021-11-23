@@ -36,14 +36,16 @@ function clickQuiz(idQuiz) {
 
 let percentual = 0;
 let levels = [];
-let id = 0;
+let ids = 0;
 
+//procura o quizz
 function searchQuizz(idQuizz) {
-    id = idQuizz;
+    ids = idQuizz;
     let quizzes = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + idQuizz);
     quizzes.then(openQuizz);
 }
 
+//abre o quizz
 function openQuizz(answers) {
     let elementTitle = document.querySelector(".layer h2");
     levels = answers.data.levels;
@@ -99,6 +101,8 @@ function shuffle() {
     return Math.random() - 0.5;
 }
 
+//função para ao selecionar as respostas revelar a corretar 
+
 function selectAnswer(option) {
     const numberAnswers = option.parentNode;
     const numbersAll = numberAnswers.querySelectorAll(".option");
@@ -150,13 +154,17 @@ function selectAnswer(option) {
     }
 }
 
+//função para reiniciar o quizz na pagina 2
+
 function restartQuizz() {
     const showResult = document.querySelector(".result");
-    searchQuizz(id);
+    searchQuizz(ids);
     showResult.classList.add("hidden");
     window.scrollTo(0, 0);
     percentual = 0;
 }
+
+//função para retornar home da pagina 2
 
 function returnHome() {
     const elementTelaInicio = document.getElementById("telaInicio");
@@ -208,7 +216,6 @@ function saveSection1() {
         console.log(quiz);
         displaySection2()
     }
-
 }
 
 function displaySection2() {
@@ -227,17 +234,17 @@ function displayQuestions(secao) {
         `<ion-icon name="create-outline" onclick="openQuestion(this)"></ion-icon>
             <input type="text" id="question${conter}" placeholder="Texto da pergunta" />
             <input type="text" id="color${conter}" placeholder="Cor de fundo da pergunta" />
-            <p>Resposta correta</p>
-            <input type="text" id="answerCorrect${conter}" placeholder="Resposta correta" />
+            <p>response correta</p>
+            <input type="text" id="answerCorrect${conter}" placeholder="response correta" />
             <input type="text" id="urlCorrect${conter}" placeholder="URL da imagem" />
-            <p>Respostas incorretas</p>
-            <input type="text" id="answerWrong1_${conter}" placeholder="Resposta incorreta 1" />
+            <p>responses incorretas</p>
+            <input type="text" id="answerWrong1_${conter}" placeholder="response incorreta 1" />
             <input type="text" id="urlWrong1${conter}" placeholder="URL da imagem 1" />
             <br>
-            <input type="text" id="answerWrong2_${conter}" placeholder="Resposta incorreta 2" />
+            <input type="text" id="answerWrong2_${conter}" placeholder="response incorreta 2" />
             <input type="text" id="urlWrong2${conter}" placeholder="URL da imagem 2" />
             <br>
-            <input type="text" id="answerWrong3_${conter}" placeholder="Resposta incorreta 3" />
+            <input type="text" id="answerWrong3_${conter}" placeholder="response incorreta 3" />
             <input type="text" id="urlWrong3${conter}" placeholder="URL da imagem 3" />`;
 }
 
@@ -348,13 +355,15 @@ function displayNivel(secao) {
     <input type="text" id="description${conter}" placeholder="Descrição do nível" />`
 }
 
+// não mexi nessa função mas será necessário por o sendquizz() aqui, fiquei receosa de por no local errado
+// testei usando console.log essa function e acredito que está dando erro por isso não consegui testar o post mas espero estar certo, amanhã acordo cedo para vermos isso
+
 function saveSection3() {
     let i = conter - 1;
     const title = (document.getElementById(`${'titleNivel' + i}`)).value;
     const minValue = (document.getElementById(`${'hit' + i}`)).value;
     const image = (document.getElementById(`${'imageNivel' + i}`)).value;
     const text = (document.getElementById(`${'description' + i}`)).value;
-
 
     const valid = checkURL(image);
 
@@ -366,7 +375,7 @@ function saveSection3() {
         quiz.levels = niveis;
         console.log(i);
         console.log(quiz);
-        console.log(qtdN)
+        console.log(qtdN);
         if (i === qtdN) {
             console.log('entrei')
             conter = 1;
@@ -374,10 +383,20 @@ function saveSection3() {
             const elementSection4 = document.querySelector("#criarQuizzes .section4");
             elementSection3.classList.add("hidden");
             elementSection4.classList.remove("hidden");
+
+
         } else {
             return true;
         }
     }
+
+}
+
+function sendQuizz() {
+
+    const quizzToServer = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', quiz);
+    quizzToServer.then(successQuizz);
+
 }
 
 function checkURL(url) {
@@ -396,12 +415,66 @@ function checkURL(url) {
     }
 }
 
+//Essa função vai começar fazendo o localStorage que armazena os ids do site, depois ela puxa o servidor com esse id para abrir a pagina de "sucesso" com a imagem e titulo do teste, mantive a pagina que você criou mesmo
 
 
 //criação do quizz parte Carol
-function successQuizz() {
-    const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
-    const elementSuccess = document.querySelector(".screenSuccess");
-    elementSuccess.classList.remove("hidden");
-    elementCreateQuiz.classList.add("hidden");
+function successQuizz(response) {
+    // const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
+    // const elementSuccess = document.querySelector(".screenSuccess");
+    // elementSuccess.classList.remove("hidden");
+    // elementCreateQuiz.classList.add("hidden");
+    let idUsersQuizzes = []
+    let id = response.data.id;
+    idUsersQuizzes.push(id);
+    const idString = localStorage.getItem("id");
+    if (idString === null) {
+        id = JSON.stringify(idUsersQuizzes);
+        localStorage.setItem("id", id)
+    } else {
+        idUsersQuizzes = JSON.parse(idString)
+        idUsersQuizzes.push(id);
+        let idSerial = JSON.stringify(idUsersQuizzes);
+        localStorage.setItem("id", idSerial);
+    }
+    ids = response.data.id;
+
+    let quizzCreated = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + response.data.id);
+
+    const endCreation = document.querySelector("#criarQuizzes .section4");
+    endCreation.innerHTML = `<div class="titulo">
+    <p>Seu quizz está pronto!</p>
+</div>
+<div class="quizPronto">
+    <div class="quiz">
+        <div class="degrade">
+        </div>
+        <img src= ${quizzCreated.data.image}/>
+        <div class="tittleQuiz">
+            <h3>${quizzCreated.data.title}</h3>
+        </div>
+    </div>
+</div>
+<div class="button" onclick="openMyQuizz()">
+    <button>
+        Acessar Quizz
+    </button>
+</div>
+<div class="buttonHome" onclick="reload()">
+    <button>
+        Voltar pra home
+    </button>
+</div>`
+}
+
+//ativada ao clicar no botão "acessar quizz" da pagina 3 após ele ser criado
+
+function openMyQuizz() {
+    searchQuizz(ids);
+}
+
+//reinicia e atualiza o servidor para voltar com a pagina 1 ja com o quiz recem feito
+
+function reload() {
+    document.location.reload(true);
 }
