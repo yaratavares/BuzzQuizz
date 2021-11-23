@@ -2,6 +2,7 @@
 
 const promisse = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
 
+let idUsersQuizzes = []
 promisse.then(takeAllQuiz);
 
 promisse.catch(function(response) {
@@ -10,8 +11,30 @@ promisse.catch(function(response) {
 
 function takeAllQuiz(response) {
     const elementAllQuizzes = document.querySelector(".section2 .todosQuizes");
+    const elementSeusQuizzes = document.querySelector(".section1 .seusQuizes");
+
+    if (idUsersQuizzes.length !== 0 ){
+        const elementDivisor = document.querySelector(".section1 .divisor");
+        const elementCriarQuiz = document.querySelector(".section1 .criarQuiz");
+        elementDivisor.classList.remove('semQuiz');
+        elementSeusQuizzes.classList.remove('semQuiz');
+        elementCriarQuiz.classList.add('comQuiz');
+    }
+
     for (let i = 0; i < response.data.length; i++) {
-        elementAllQuizzes.innerHTML +=
+
+        if (idUsersQuizzes.includes(response.data[i].id)){
+            elementSeusQuizzes.innerHTML +=
+            `<div class="quiz quizSeus" >
+                <div class="degrade" onclick="clickQuiz(${response.data[i].id})">
+                </div>
+                <img src="${response.data[i].image}" />
+                <div class="tittleQuiz">
+                    <h3>${response.data[i].title}</h3>
+                </div>
+            </div>`
+        } else {
+            elementAllQuizzes.innerHTML +=
             `<div class="quiz quizTodos" >
                 <div class="degrade" onclick="clickQuiz(${response.data[i].id})">
                 </div>
@@ -20,7 +43,9 @@ function takeAllQuiz(response) {
                     <h3>${response.data[i].title}</h3>
                 </div>
             </div>`
+        }
     }
+
 }
 
 function clickQuiz(idQuiz) {
@@ -214,7 +239,6 @@ function saveSection1() {
         elementSection1.classList.add("hidden");
         elementSection2.classList.remove("hidden");
 
-        console.log(quiz);
         displaySection2()
     }
 }
@@ -288,7 +312,7 @@ function saveSection2() {
     if (question.length < 20 || !(color.includes('#')) || !(color.length === 7) || answerCorrect === null || answerWrong1 === null || !valid1 || !valid2) {
         alert('Preenchar os dados corretamente');
     } else {
-        questions.push({ tittle: question, color });
+        questions.push({ title: question, color });
         answer.push({ text: answerCorrect, image: urlCorrect, isCorrectAnswer: true });
         answer.push({ text: answerWrong1, image: urlWrong1, isCorrectAnswer: false });
 
@@ -300,7 +324,7 @@ function saveSection2() {
         }
 
         quiz.questions = questions;
-        quiz.questions[i - 1].answer = answer;
+        quiz.questions[i - 1].answers = answer;
 
         if (`${i}` === qtdP) {
             conter = 1;
@@ -330,7 +354,7 @@ function displaySection3() {
 
 function openNivel(icon) {
     const div = icon.parentNode;
-    console.log(div);
+  
     if (conter === 1) {
         div.classList.remove("outrasPerguntasNiveis");
         div.classList.add('containerInput');
@@ -374,18 +398,15 @@ function saveSection3() {
         niveis.push({ title, image, text, minValue });
 
         quiz.levels = niveis;
-        console.log(i);
-        console.log(quiz);
-        console.log(qtdN);
-        if (i === qtdN) {
-            console.log('entrei')
+
+        if (`${i}` === qtdN) {
             conter = 1;
             const elementSection3 = document.querySelector("#criarQuizzes .section3");
             const elementSection4 = document.querySelector("#criarQuizzes .section4");
             elementSection3.classList.add("hidden");
             elementSection4.classList.remove("hidden");
 
-
+            sendQuizz();
         } else {
             return true;
         }
@@ -397,21 +418,21 @@ function sendQuizz() {
 
     const quizzToServer = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', quiz);
     quizzToServer.then(successQuizz);
-
+    quizzToServer.catch(function(erro){
+        console.log(erro);
+    })
 }
 
 function checkURL(url) {
     if (url.includes('.jpeg')) {
         return true;
     } else if (url.includes('.jpg')) {
-        ('entrei na certa')
         return true;
     } else if (url.includes('gif')) {
         return true;
     } else if (url.includes('png')) {
         return true
     } else {
-        ('entrei na errada')
         return false;
     }
 }
@@ -425,7 +446,6 @@ function successQuizz(response) {
     // const elementSuccess = document.querySelector(".screenSuccess");
     // elementSuccess.classList.remove("hidden");
     // elementCreateQuiz.classList.add("hidden");
-    let idUsersQuizzes = []
     let id = response.data.id;
     idUsersQuizzes.push(id);
     const idString = localStorage.getItem("id");
@@ -441,41 +461,58 @@ function successQuizz(response) {
     ids = response.data.id;
 
     let quizzCreated = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + response.data.id);
-
     const endCreation = document.querySelector("#criarQuizzes .section4");
-    endCreation.innerHTML = `<div class="titulo">
-    <p>Seu quizz está pronto!</p>
-</div>
-<div class="quizPronto">
-    <div class="quiz">
-        <div class="degrade">
+
+    quizzCreated.then(function (quizzCreated){
+        endCreation.innerHTML = 
+        `<div class="titulo">
+        <p>Seu quizz está pronto!</p>
         </div>
-        <img src= ${quizzCreated.data.image}/>
-        <div class="tittleQuiz">
-            <h3>${quizzCreated.data.title}</h3>
+        <div class="quizPronto">
+            <div class="quiz">
+                <div class="degrade">
+                </div>
+                <img src= ${quizzCreated.data.image}/>
+                <div class="tittleQuiz">
+                    <h3>${quizzCreated.data.title}</h3>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<div class="button" onclick="openMyQuizz()">
-    <button>
-        Acessar Quizz
-    </button>
-</div>
-<div class="buttonHome" onclick="reload()">
-    <button>
-        Voltar pra home
-    </button>
-</div>`
+        <div class="button">
+            <button onclick="openMyQuizz(${quizzCreated.data.id})">
+                Acessar Quizz
+            </button>
+        </div>
+        <div class="buttonHome" onclick="reload()">
+            <button>
+                Voltar pra home
+            </button>
+        </div>`
+    })
+
+    quizzCreated.catch(function(erro){
+        console.log(erro);
+    })
+
 }
 
 //ativada ao clicar no botão "acessar quizz" da pagina 3 após ele ser criado
 
-function openMyQuizz() {
+function openMyQuizz(ids) {
     searchQuizz(ids);
 }
 
 //reinicia e atualiza o servidor para voltar com a pagina 1 ja com o quiz recem feito
 
 function reload() {
-    document.location.reload(true);
+    const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
+    const elementTelaInicio = document.getElementById("telaInicio");
+    elementCreateQuiz.classList.add("hidden");
+    elementTelaInicio.classList.remove("hidden");
+
+    setTimeout(function(){
+        document.location.reload(true);
+    }, 1000);
 }
+
+console.log(idUsersQuizzes)
