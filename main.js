@@ -1,9 +1,7 @@
 //modificacao da DOM pagina 1
 const promisse = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
 
-//tela de carregamento
-
-let idUsersQuizzes = []
+let idUsersQuizzes = [];
 promisse.then(takeAllQuiz);
 
 promisse.catch(function(response) {
@@ -15,8 +13,11 @@ function takeAllQuiz(response) {
     const elementAllQuizzes = document.querySelector(".section2 .todosQuizes");
     const elementSeusQuizzes = document.querySelector(".section1 .seusQuizes");
     (elementAllQuizzes.parentNode).parentNode.classList.remove('hidden')
+    idUsersQuizzesString = localStorage.getItem("id");
+    idUsersQuizzes = JSON.parse(idUsersQuizzesString);
+    console.log(idUsersQuizzes);
 
-    if (idUsersQuizzes.length !== 0 ){
+    if (idUsersQuizzes.length !== 0) {
         const elementDivisor = document.querySelector(".section1 .divisor");
         const elementCriarQuiz = document.querySelector(".section1 .criarQuiz");
         elementDivisor.classList.remove('semQuiz');
@@ -26,9 +27,9 @@ function takeAllQuiz(response) {
 
     for (let i = 0; i < response.data.length; i++) {
 
-        if (idUsersQuizzes.includes(response.data[i].id)){
+        if (idUsersQuizzes.includes(response.data[i].id)) {
             elementSeusQuizzes.innerHTML +=
-            `<div class="quiz quizSeus" >
+                `<div class="quiz quizSeus" >
                 <div class="degrade" onclick="clickQuiz(${response.data[i].id})">
                 </div>
                 <img src="${response.data[i].image}" />
@@ -38,7 +39,7 @@ function takeAllQuiz(response) {
             </div>`
         } else {
             elementAllQuizzes.innerHTML +=
-            `<div class="quiz quizTodos" >
+                `<div class="quiz quizTodos" >
                 <div class="degrade" onclick="clickQuiz(${response.data[i].id})">
                 </div>
                 <img src="${response.data[i].image}" />
@@ -353,7 +354,7 @@ function displaySection3() {
 
 function openNivel(icon) {
     const div = icon.parentNode;
-  
+
     if (conter === 1) {
         div.classList.remove("outrasPerguntasNiveis");
         div.classList.add('containerInput');
@@ -418,7 +419,7 @@ function sendQuizz() {
 
     const quizzToServer = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', quiz);
     quizzToServer.then(successQuizz);
-    quizzToServer.catch(function(erro){
+    quizzToServer.catch(function(erro) {
         console.log(erro);
     })
 }
@@ -455,24 +456,26 @@ function successQuizz(response) {
     } else {
         idUsersQuizzes = JSON.parse(idString)
         idUsersQuizzes.push(id);
+        idUsersQuizzes[idUsersQuizzes.length] = id;
         let idSerial = JSON.stringify(idUsersQuizzes);
         localStorage.setItem("id", idSerial);
     }
     ids = response.data.id;
+    console.log(ids);
 
     let quizzCreated = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + response.data.id);
     const endCreation = document.querySelector("#criarQuizzes .section4");
 
-    quizzCreated.then(function (quizzCreated){
-        endCreation.innerHTML = 
-        `<div class="titulo">
+    quizzCreated.then(function(quizzCreated) {
+        endCreation.innerHTML =
+            `<div class="titulo">
         <p>Seu quizz está pronto!</p>
         </div>
         <div class="quizPronto">
             <div class="quiz">
                 <div class="degrade">
                 </div>
-                <img src= ${quizzCreated.data.image}/>
+                <img src= '${quizzCreated.data.image}'/>
                 <div class="tittleQuiz">
                     <h3>${quizzCreated.data.title}</h3>
                 </div>
@@ -491,7 +494,7 @@ function successQuizz(response) {
         carregando();
     })
 
-    quizzCreated.catch(function(erro){
+    quizzCreated.catch(function(erro) {
         console.log(erro);
     })
 
