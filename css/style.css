@@ -49,14 +49,14 @@
     #telaInicio .section1 {
         padding: 31px 0 14px 18px;
     }
-
-    #telaInicio .section1 .divisor{
+    
+    #telaInicio .section1 .divisor {
         width: 1100px;
         display: flex;
         justify-content: start;
         text-indent: 18px;
     }
-
+    
     #telaInicio .section1 .divisor ion-icon {
         font-size: 20px;
         color: #EC362D;
@@ -90,22 +90,19 @@
         border: 1px dashed #EC362D;
         border-radius: 50px;
     }
-
     
-
-    #telaInicio .section1 .seusQuizes{
+    #telaInicio .section1 .seusQuizes {
         display: flex;
         flex-wrap: wrap;
     }
-    
     /* trecho que determina quem ira aparecer */
     
     #telaInicio .criarQuiz.comQuiz,
-    #telaInicio .divisor.semQuiz, #telaInicio .seusQuizes.semQuiz {
+    #telaInicio .divisor.semQuiz,
+    #telaInicio .seusQuizes.semQuiz {
         visibility: hidden;
         display: none;
     }
-
     /* tudo que se refere a padronização da listagem de quiz */
     
     #telaInicio .section2 {
@@ -138,7 +135,7 @@
         border-radius: 5px;
     }
     
-   .quiz .tittleQuiz h3 {
+    .quiz .tittleQuiz h3 {
         font-size: 19px;
         font-weight: 400;
         line-height: 22px;
@@ -151,11 +148,12 @@
         right: 18px;
     }
     /*layout tela 2 */
+    
     main.pageQuizz.hidden {
         visibility: hidden;
         display: none;
     }
-
+    
     .quizzLayout {
         display: flex;
         flex-direction: column;
@@ -325,6 +323,10 @@
         color: #818181;
     }
     
+    .buttonsQuizz {
+        width: 100%;
+    }
+    
     .backHome {
         margin-bottom: 85px;
     }
@@ -375,7 +377,6 @@
     .right {
         color: #009C22;
     }
-    
     /* inicio da terceira tela */
     
     #criarQuizzes.container .section1 {
@@ -444,11 +445,11 @@
         margin-top: 69px;
         background: #FAFAFA;
     }
-
+    
     #criarQuizzes .section2 .containerInput {
         margin-bottom: 14px;
     }
-
+    
     #criarQuizzes .containerInput ion-icon {
         display: none;
     }
@@ -547,21 +548,50 @@
         display: none;
     }
     
+    .screenSuccess {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .successLayout img {
+        height: 266px;
+        width: 500px;
+        border-radius: 5px;
+        margin-bottom: 46px;
+    }
+    
+    .successLayout {
+        width: 100%;
+        margin-top: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .successLayout h1 {
+        font-size: 23px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 27px;
+        margin-bottom: 46px;
+    }
     
     @media (min-width: 1100px) {
         #telaInicio .section1,
         #telaInicio .section2 {
-            margin: 1px ;
+            margin: 1px;
             padding-left: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-
         }
         #telaInicio .todosQuizes {
             justify-content: center;
         }
-        #telaInicio .section2 .divisor{
+        #telaInicio .section2 .divisor {
             width: 1100px;
             margin-top: 29px;
             text-indent: 18px;
@@ -581,7 +611,7 @@
             margin-bottom: 0;
         }
     }
-
+    
     @media (max-width: 1100px) {
         .pageQuizz header {
             height: 69px;
@@ -601,8 +631,35 @@
         .result {
             width: 100vw;
         }
+        .successLayout img {
+            width: 90%;
+        }
+        .successLayout h1 {
+            width: 70%;
+            text-align: center;
+        }
+        .buttonRestart {
+            width: 24%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .backHome {
+            width: 24%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .screenSuccess footer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
     }
-
+    
     @media (min-width: 600px) {
         #criarQuizzes .containerInput {
             width: 600px;

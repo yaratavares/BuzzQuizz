@@ -37,14 +37,16 @@ function clickQuiz(idQuiz) {
 
 let percentual = 0;
 let levels = [];
-let id = 0;
+let ids = 0;
 
+//procura o quizz
 function searchQuizz(idQuizz) {
-    id = idQuizz;
+    ids = idQuizz;
     let quizzes = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + idQuizz);
     quizzes.then(openQuizz);
 }
 
+//abre o quizz
 function openQuizz(answers) {
     let elementTitle = document.querySelector(".layer h2");
     levels = answers.data.levels;
@@ -100,6 +102,8 @@ function shuffle() {
     return Math.random() - 0.5;
 }
 
+//função para ao selecionar as respostas revelar a corretar 
+
 function selectAnswer(option) {
     const numberAnswers = option.parentNode;
     const numbersAll = numberAnswers.querySelectorAll(".option");
@@ -137,7 +141,7 @@ function selectAnswer(option) {
         for (i = 0; i < levels.length; i++) {
             if (result => levels.minValue[i] && result <= levels.minValue[i + 1]) {
                 showResult.innerHTML = `<div class="resultTitle">
-                <h3>${levels[i].title}</h3>
+                <h3>${result}% de acerto: ${levels[i].title}</h3>
             </div>
             <div class="resultText">
                 <img src=${levels[i].image}>
@@ -151,13 +155,17 @@ function selectAnswer(option) {
     }
 }
 
+//função para reiniciar o quizz na pagina 2
+
 function restartQuizz() {
     const showResult = document.querySelector(".result");
-    searchQuizz(id);
+    searchQuizz(ids);
     showResult.classList.add("hidden");
     window.scrollTo(0, 0);
     percentual = 0;
 }
+
+//função para retornar home da pagina 2
 
 function returnHome() {
     const elementTelaInicio = document.getElementById("telaInicio");
@@ -173,7 +181,7 @@ function returnHome() {
 
 //criacao do quiz
 // variaveis globais para as funçoes a seguir:
-let quiz = {};	
+let quiz = {};
 let qtdP;
 let qtdN = 2;
 let questions = [];
@@ -188,69 +196,68 @@ function createQuiz() {
     elementCreateQuiz.classList.remove("hidden");
 }
 
-function saveSection1 (){
+function saveSection1() {
     const title = (document.getElementById('title')).value;
     const image = (document.getElementById('imageQuiz')).value;
     qtdP = (document.getElementById('qtdP')).value;
     qtdN = (document.getElementById('qtdN')).value;
     const imageURL = checkURL(image);
-    
-    if( title.length < 20 || title.length > 65 || qtdP < 3 || qtdN < 2 || !imageURL){
+
+    if (title.length < 20 || title.length > 65 || qtdP < 3 || qtdN < 2 || !imageURL) {
         alert('Preenchar os dados corretamente');
         return;
-      } else {
-          quiz = {title  , image};
-        
-          const elementSection1 = document.querySelector("#criarQuizzes .section1");
-          const elementSection2 = document.querySelector("#criarQuizzes .section2");
-          elementSection1.classList.add("hidden");
-          elementSection2.classList.remove("hidden");
+    } else {
+        quiz = { title, image };
 
-          console.log(quiz);
-          displaySection2()
-      }
+        const elementSection1 = document.querySelector("#criarQuizzes .section1");
+        const elementSection2 = document.querySelector("#criarQuizzes .section2");
+        elementSection1.classList.add("hidden");
+        elementSection2.classList.remove("hidden");
 
+        console.log(quiz);
+        displaySection2()
+    }
 }
 
-function displaySection2 (){
+function displaySection2() {
     const secao = document.querySelector("#criarQuizzes .section2 .containerQuestions");
-    for (let i=1; i<= qtdP; i++){
+    for (let i = 1; i <= qtdP; i++) {
         secao.innerHTML +=
-        `<div class="outrasPerguntasNiveis">
+            `<div class="outrasPerguntasNiveis">
             <p class="question${i}">Pergunta ${i}</p>
             <ion-icon name="create-outline" onclick="openQuestion(this)"></ion-icon>
         </div>`
     }
 }
 
-function displayQuestions (secao) {
-        secao.innerHTML += 
-            `<ion-icon name="create-outline" onclick="openQuestion(this)"></ion-icon>
+function displayQuestions(secao) {
+    secao.innerHTML +=
+        `<ion-icon name="create-outline" onclick="openQuestion(this)"></ion-icon>
             <input type="text" id="question${conter}" placeholder="Texto da pergunta" />
             <input type="text" id="color${conter}" placeholder="Cor de fundo da pergunta" />
-            <p>Resposta correta</p>
-            <input type="text" id="answerCorrect${conter}" placeholder="Resposta correta" />
+            <p>response correta</p>
+            <input type="text" id="answerCorrect${conter}" placeholder="response correta" />
             <input type="text" id="urlCorrect${conter}" placeholder="URL da imagem" />
-            <p>Respostas incorretas</p>
-            <input type="text" id="answerWrong1_${conter}" placeholder="Resposta incorreta 1" />
+            <p>responses incorretas</p>
+            <input type="text" id="answerWrong1_${conter}" placeholder="response incorreta 1" />
             <input type="text" id="urlWrong1${conter}" placeholder="URL da imagem 1" />
             <br>
-            <input type="text" id="answerWrong2_${conter}" placeholder="Resposta incorreta 2" />
+            <input type="text" id="answerWrong2_${conter}" placeholder="response incorreta 2" />
             <input type="text" id="urlWrong2${conter}" placeholder="URL da imagem 2" />
             <br>
-            <input type="text" id="answerWrong3_${conter}" placeholder="Resposta incorreta 3" />
+            <input type="text" id="answerWrong3_${conter}" placeholder="response incorreta 3" />
             <input type="text" id="urlWrong3${conter}" placeholder="URL da imagem 3" />`;
 }
 
-function openQuestion (icon){
+function openQuestion(icon) {
     const div = icon.parentNode;
-    if (conter === 1){
+    if (conter === 1) {
         div.classList.remove("outrasPerguntasNiveis");
         div.classList.add('containerInput');
         displayQuestions(div);
     } else {
         let valid = saveSection2();
-        if (valid){
+        if (valid) {
             div.classList.remove("outrasPerguntasNiveis");
             div.classList.add('containerInput');
             displayQuestions(div);
@@ -261,7 +268,7 @@ function openQuestion (icon){
     conter++;
 }
 
- function saveSection2 (){
+function saveSection2() {
     let i = conter - 1;
     let question = (document.getElementById(`${'question' + i}`)).value;
     let color = (document.getElementById(`${'color' + i}`)).value;
@@ -275,27 +282,27 @@ function openQuestion (icon){
     let urlWrong3 = (document.getElementById(`${'urlWrong3' + i}`)).value;
     let answer = [];
 
-    let valid1 = checkURL(urlCorrect);  
+    let valid1 = checkURL(urlCorrect);
     let valid2 = checkURL(urlWrong1);
 
     if (question.length < 20 || !(color.includes('#')) || !(color.length === 7) || answerCorrect === null || answerWrong1 === null || !valid1 || !valid2) {
         alert('Preenchar os dados corretamente');
     } else {
-        questions.push({tittle: question, color});
-        answer.push ({text: answerCorrect, image: urlCorrect, isCorrectAnswer: true});
-        answer.push ({text: answerWrong1, image: urlWrong1, isCorrectAnswer: false});
-        
-        if (answerWrong2 !== null && checkURL(urlWrong2)){
-            answer.push ({text: answerWrong2, image: urlWrong2, isCorrectAnswer: false});
-            if (answerWrong3 !== null && checkURL(urlWrong3)){
-                answer.push ({text: answerWrong3, image: urlWrong3, isCorrectAnswer: false});
+        questions.push({ tittle: question, color });
+        answer.push({ text: answerCorrect, image: urlCorrect, isCorrectAnswer: true });
+        answer.push({ text: answerWrong1, image: urlWrong1, isCorrectAnswer: false });
+
+        if (answerWrong2 !== null && checkURL(urlWrong2)) {
+            answer.push({ text: answerWrong2, image: urlWrong2, isCorrectAnswer: false });
+            if (answerWrong3 !== null && checkURL(urlWrong3)) {
+                answer.push({ text: answerWrong3, image: urlWrong3, isCorrectAnswer: false });
             }
-        }  
-        
+        }
+
         quiz.questions = questions;
-        quiz.questions[i-1].answer = answer;
-     
-        if (`${i}` === qtdP){
+        quiz.questions[i - 1].answer = answer;
+
+        if (`${i}` === qtdP) {
             conter = 1;
             const elementSection2 = document.querySelector("#criarQuizzes .section2");
             const elementSection3 = document.querySelector("#criarQuizzes .section3");
@@ -309,28 +316,28 @@ function openQuestion (icon){
     }
 }
 
-function displaySection3 (){
+function displaySection3() {
     const secao = document.querySelector("#criarQuizzes .section3 .containerNiveis");
-    
-    for (let i=1; i<= qtdN; i++){
+
+    for (let i = 1; i <= qtdN; i++) {
         secao.innerHTML +=
-        `<div class="outrasPerguntasNiveis">
+            `<div class="outrasPerguntasNiveis">
             <p class="nivel${i}">Nível ${i}</p>
             <ion-icon name="create-outline" onclick="openNivel(this)"></ion-icon>
         </div>`
     }
 }
 
-function openNivel (icon){
+function openNivel(icon) {
     const div = icon.parentNode;
     console.log(div);
-    if (conter === 1){
+    if (conter === 1) {
         div.classList.remove("outrasPerguntasNiveis");
         div.classList.add('containerInput');
         displayNivel(div);
     } else {
         let valid = saveSection3();
-        if (valid){
+        if (valid) {
             div.classList.remove("outrasPerguntasNiveis");
             div.classList.add('containerInput');
             displayNivel(div);
@@ -341,59 +348,134 @@ function openNivel (icon){
     conter++;
 }
 
-function displayNivel (secao) {
-    secao.innerHTML += 
-    `<input type="text" id="titleNivel${conter}" placeholder="Título do nível" />
+function displayNivel(secao) {
+    secao.innerHTML +=
+        `<input type="text" id="titleNivel${conter}" placeholder="Título do nível" />
     <input type="text" id="hit${conter}" placeholder="% de acerto mínima" />
     <input type="text" id="imageNivel${conter}" placeholder="URL da imagem do nível" />
     <input type="text" id="description${conter}" placeholder="Descrição do nível" />`
 }
 
+// não mexi nessa função mas será necessário por o sendquizz() aqui, fiquei receosa de por no local errado
+// testei usando console.log essa function e acredito que está dando erro por isso não consegui testar o post mas espero estar certo, amanhã acordo cedo para vermos isso
 
-function saveSection3 () {
+function saveSection3() {
     let i = conter - 1;
     const title = (document.getElementById(`${'titleNivel' + i}`)).value;
     const minValue = (document.getElementById(`${'hit' + i}`)).value;
     const image = (document.getElementById(`${'imageNivel' + i}`)).value;
     const text = (document.getElementById(`${'description' + i}`)).value;
-  
 
     const valid = checkURL(image);
-    
-    if(!valid || title.length < 10 || minValue > 100 || minValue < 0 || text.length < 30){
+
+    if (!valid || title.length < 10 || minValue > 100 || minValue < 0 || text.length < 30) {
         alert('Preenchar os dados corretamente');
     } else {
-        niveis.push({title , image, text , minValue});
+        niveis.push({ title, image, text, minValue });
 
         quiz.levels = niveis;
         console.log(i);
         console.log(quiz);
-        console.log(qtdN)
-        if (i === qtdN){
+        console.log(qtdN);
+        if (i === qtdN) {
             console.log('entrei')
             conter = 1;
             const elementSection3 = document.querySelector("#criarQuizzes .section3");
             const elementSection4 = document.querySelector("#criarQuizzes .section4");
             elementSection3.classList.add("hidden");
             elementSection4.classList.remove("hidden");
+
+
         } else {
             return true;
         }
     }
+
+}
+
+function sendQuizz() {
+
+    const quizzToServer = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', quiz);
+    quizzToServer.then(successQuizz);
+
 }
 
 function checkURL(url) {
-    if(url.includes('.jpeg')){
+    if (url.includes('.jpeg')) {
         return true;
-    } else if (url.includes('.jpg')){
+    } else if (url.includes('.jpg')) {
         ('entrei na certa')
         return true;
-    } else if (url.includes('gif')){
+    } else if (url.includes('gif')) {
         return true;
-    } else if (url.includes('png')){
+    } else if (url.includes('png')) {
         return true
     } else {
         ('entrei na errada')
         return false;
     }
+}
+
+//Essa função vai começar fazendo o localStorage que armazena os ids do site, depois ela puxa o servidor com esse id para abrir a pagina de "sucesso" com a imagem e titulo do teste, mantive a pagina que você criou mesmo
+
+
+//criação do quizz parte Carol
+function successQuizz(response) {
+    // const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
+    // const elementSuccess = document.querySelector(".screenSuccess");
+    // elementSuccess.classList.remove("hidden");
+    // elementCreateQuiz.classList.add("hidden");
+    let idUsersQuizzes = []
+    let id = response.data.id;
+    idUsersQuizzes.push(id);
+    const idString = localStorage.getItem("id");
+    if (idString === null) {
+        id = JSON.stringify(idUsersQuizzes);
+        localStorage.setItem("id", id)
+    } else {
+        idUsersQuizzes = JSON.parse(idString)
+        idUsersQuizzes.push(id);
+        let idSerial = JSON.stringify(idUsersQuizzes);
+        localStorage.setItem("id", idSerial);
+    }
+    ids = response.data.id;
+
+    let quizzCreated = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + response.data.id);
+
+    const endCreation = document.querySelector("#criarQuizzes .section4");
+    endCreation.innerHTML = `<div class="titulo">
+    <p>Seu quizz está pronto!</p>
+</div>
+<div class="quizPronto">
+    <div class="quiz">
+        <div class="degrade">
+        </div>
+        <img src= ${quizzCreated.data.image}/>
+        <div class="tittleQuiz">
+            <h3>${quizzCreated.data.title}</h3>
+        </div>
+    </div>
+</div>
+<div class="button" onclick="openMyQuizz()">
+    <button>
+        Acessar Quizz
+    </button>
+</div>
+<div class="buttonHome" onclick="reload()">
+    <button>
+        Voltar pra home
+    </button>
+</div>`
+}
+
+//ativada ao clicar no botão "acessar quizz" da pagina 3 após ele ser criado
+
+function openMyQuizz() {
+    searchQuizz(ids);
+}
+
+//reinicia e atualiza o servidor para voltar com a pagina 1 ja com o quiz recem feito
+
+function reload() {
+    document.location.reload(true);
 }
