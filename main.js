@@ -32,6 +32,7 @@ function clickQuiz(idQuiz) {
     searchQuizz(idQuiz);
 }
 
+
 // modificacao da DOM pagina 2
 
 let percentual = 0;
