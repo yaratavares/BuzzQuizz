@@ -13,19 +13,11 @@ function takeAllQuiz(response) {
     const elementAllQuizzes = document.querySelector(".section2 .todosQuizes");
     const elementSeusQuizzes = document.querySelector(".section1 .seusQuizes");
     (elementAllQuizzes.parentNode).parentNode.classList.remove('hidden')
+
     idUsersQuizzesString = localStorage.getItem("id");
     idUsersQuizzes = JSON.parse(idUsersQuizzesString);
-    console.log(idUsersQuizzes);
 
-    if (idUsersQuizzes.length !== 0) {
-        const elementDivisor = document.querySelector(".section1 .divisor");
-        const elementCriarQuiz = document.querySelector(".section1 .criarQuiz");
-        elementDivisor.classList.remove('semQuiz');
-        elementSeusQuizzes.classList.remove('semQuiz');
-        elementCriarQuiz.classList.add('comQuiz');
-    }
-
-    for (let i = 0; i < response.data.length; i++) {
+    for (let i = 0, j=0; i < response.data.length; i++) {
 
         if (idUsersQuizzes.includes(response.data[i].id)) {
             elementSeusQuizzes.innerHTML +=
@@ -37,6 +29,14 @@ function takeAllQuiz(response) {
                     <h3>${response.data[i].title}</h3>
                 </div>
             </div>`
+            if (idUsersQuizzes.length !== 0 && j === 0) {
+                const elementDivisor = document.querySelector(".section1 .divisor");
+                const elementCriarQuiz = document.querySelector(".section1 .criarQuiz");
+                elementDivisor.classList.remove('semQuiz');
+                elementSeusQuizzes.classList.remove('semQuiz');
+                elementCriarQuiz.classList.add('comQuiz');
+                j=1;
+            }
         } else {
             elementAllQuizzes.innerHTML +=
                 `<div class="quiz quizTodos" >
@@ -305,12 +305,22 @@ function saveSection2() {
     let answerWrong3 = (document.getElementById(`${'answerWrong3_' + i}`)).value;
     let urlWrong3 = (document.getElementById(`${'urlWrong3' + i}`)).value;
     let answer = [];
+    const letters = ['G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'W', 'Y', 'Z'];
 
     let valid1 = checkURL(urlCorrect);
     let valid2 = checkURL(urlWrong1);
+    color = color.toUpperCase();
+    let valid3 = true;
 
-    if (question.length < 20 || !(color.includes('#')) || !(color.length === 7) || answerCorrect === null || answerWrong1 === null || !valid1 || !valid2) {
+    for (let i=0; i < color.length ; i++){
+        if (color.includes(letters[i])){
+            valid3 = false;
+        } 
+    }
+
+    if (question.length < 20 || !(color.includes('#')) || !(color.length === 7) || answerCorrect === null || answerWrong1 === null || !valid1 || !valid2 || !valid3) {
         alert('Preenchar os dados corretamente');
+        
     } else {
         questions.push({ title: question, color });
         answer.push({ text: answerCorrect, image: urlCorrect, isCorrectAnswer: true });
@@ -390,9 +400,13 @@ function saveSection3() {
     const image = (document.getElementById(`${'imageNivel' + i}`)).value;
     const text = (document.getElementById(`${'description' + i}`)).value;
 
-    const valid = checkURL(image);
+    const valid1 = checkURL(image);
+    let valid2 = true;
+    if (i === 1 && minValue !== '0'){
+        valid2 = false;
+    }
 
-    if (!valid || title.length < 10 || minValue > 100 || minValue < 0 || text.length < 30) {
+    if (!valid1 || !valid2 || title.length < 10 || minValue > 100 || minValue < 0 || text.length < 30) {
         alert('Preenchar os dados corretamente');
     } else {
         niveis.push({ title, image, text, minValue });
