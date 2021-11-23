@@ -1,6 +1,7 @@
 //modificacao da DOM pagina 1
-
 const promisse = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes');
+
+//tela de carregamento
 
 let idUsersQuizzes = []
 promisse.then(takeAllQuiz);
@@ -10,8 +11,10 @@ promisse.catch(function(response) {
 })
 
 function takeAllQuiz(response) {
+    carregando();
     const elementAllQuizzes = document.querySelector(".section2 .todosQuizes");
     const elementSeusQuizzes = document.querySelector(".section1 .seusQuizes");
+    (elementAllQuizzes.parentNode).parentNode.classList.remove('hidden')
 
     if (idUsersQuizzes.length !== 0 ){
         const elementDivisor = document.querySelector(".section1 .divisor");
@@ -49,11 +52,12 @@ function takeAllQuiz(response) {
 }
 
 function clickQuiz(idQuiz) {
+    
     const elementTelaInicio = document.getElementById("telaInicio");
     const elementPageQuiz = document.querySelector(".pageQuizz");
     elementTelaInicio.classList.add("hidden");
     elementPageQuiz.classList.remove("hidden");
-
+    
     searchQuizz(idQuiz);
 }
 
@@ -68,6 +72,7 @@ let ids = 0;
 function searchQuizz(idQuizz) {
     ids = idQuizz;
     let quizzes = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + idQuizz);
+    carregando();
     quizzes.then(openQuizz);
 }
 
@@ -120,7 +125,7 @@ function openQuizz(answers) {
         elementColor[i].style.background = color;
     }
 
-
+    carregando();
 }
 
 function shuffle() {
@@ -193,13 +198,7 @@ function restartQuizz() {
 //função para retornar home da pagina 2
 
 function returnHome() {
-    const elementTelaInicio = document.getElementById("telaInicio");
-    const elementPageQuiz = document.querySelector(".pageQuizz");
-    elementTelaInicio.classList.remove("hidden");
-    elementPageQuiz.classList.add("hidden");
-
-    takeAllQuiz(promise);
-    window.scrollTo(0, 0);
+    document.location.reload(true);
 }
 
 
@@ -401,6 +400,7 @@ function saveSection3() {
 
         if (`${i}` === qtdN) {
             conter = 1;
+            carregando();
             const elementSection3 = document.querySelector("#criarQuizzes .section3");
             const elementSection4 = document.querySelector("#criarQuizzes .section4");
             elementSection3.classList.add("hidden");
@@ -483,11 +483,12 @@ function successQuizz(response) {
                 Acessar Quizz
             </button>
         </div>
-        <div class="buttonHome" onclick="reload()">
+        <div class="buttonHome" onclick="returnHome()">
             <button>
                 Voltar pra home
             </button>
         </div>`
+        carregando();
     })
 
     quizzCreated.catch(function(erro){
@@ -504,15 +505,22 @@ function openMyQuizz(ids) {
 
 //reinicia e atualiza o servidor para voltar com a pagina 1 ja com o quiz recem feito
 
-function reload() {
-    const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
-    const elementTelaInicio = document.getElementById("telaInicio");
-    elementCreateQuiz.classList.add("hidden");
-    elementTelaInicio.classList.remove("hidden");
+// function reload() {
+//     const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
+//     const elementTelaInicio = document.getElementById("telaInicio");
+//     elementCreateQuiz.classList.add("hidden");
+//     elementTelaInicio.classList.remove("hidden");
 
-    setTimeout(function(){
-        document.location.reload(true);
-    }, 1000);
+//     setTimeout(function(){
+//         document.location.reload(true);
+//     }, 1000);
+// }
+
+
+//tela de carregamento
+function carregando(){
+    const elementoCarregamento = document.querySelector(".telaCarregamento");
+    console.log(elementoCarregamento)
+    elementoCarregamento.classList.toggle('hidden');
 }
 
-console.log(idUsersQuizzes)
