@@ -88,9 +88,9 @@ function openQuizz(answers) {
     elementQuestions.innerHTML = "";
 
     for (let i = 0; i < answers.data.questions.length; i++) {
-        elementQuestions.innerHTML += `<div class="quizzBoxes"> <div class="question">
+        elementQuestions.innerHTML += `<div class="insideQuizzBox"><div class="quizzBoxes">  <div class="question">
         <h3>${answers.data.questions[i].title}</h3>
-        </div><div class ="answers"></div></div>`;
+        </div><div class ="answers"></div></div></div>`;
     }
 
     let elementBoxes = document.querySelectorAll(".answers");
