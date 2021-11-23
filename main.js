@@ -136,7 +136,7 @@ function selectAnswer(option) {
         for (i = 0; i < levels.length; i++) {
             if (result => levels.minValue[i] && result <= levels.minValue[i + 1]) {
                 showResult.innerHTML = `<div class="resultTitle">
-                <h3>${levels[i].title}</h3>
+                <h3>${result}% de acerto: ${levels[i].title}</h3>
             </div>
             <div class="resultText">
                 <img src=${levels[i].image}>
@@ -186,4 +186,13 @@ function createSection1() {
 
     quiz = { title: title.value, image: image.value };
     console.log(quiz);
+}
+
+//criação do quizz parte Carol
+function successQuizz() {
+    const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
+    const elementSuccess = document.querySelector(".screenSuccess");
+    elementSuccess.classList.remove("hidden");
+    elementCreateQuiz.classList.add("hidden");
+
 }
