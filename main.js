@@ -251,7 +251,7 @@ function displaySection2() {
         secao.innerHTML +=
             `<div class="outrasPerguntasNiveis">
             <p class="question${i}">Pergunta ${i}</p>
-            <ion-icon name="create-outline" onclick="openQuestion(this)"></ion-icon>
+            <ion-icon name="create-outline" data-identifier="expand" onclick="openQuestion(this)"></ion-icon>
         </div>`
     }
 }
@@ -359,7 +359,7 @@ function displaySection3() {
         secao.innerHTML +=
             `<div class="outrasPerguntasNiveis">
             <p class="nivel${i}">Nível ${i}</p>
-            <ion-icon name="create-outline" onclick="openNivel(this)"></ion-icon>
+            <ion-icon data-identifier="expand" name="create-outline" onclick="openNivel(this)"></ion-icon>
         </div>`
     }
 }
