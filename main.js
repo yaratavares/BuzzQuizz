@@ -91,7 +91,7 @@ function openQuizz(answers) {
     elementQuestions.innerHTML = "";
 
     for (let i = 0; i < answers.data.questions.length; i++) {
-        elementQuestions.innerHTML += `<div class="insideQuizzBox"><div class="quizzBoxes">  <div class="question">
+        elementQuestions.innerHTML += `<div class="insideQuizzBox"><div class="quizzBoxes">  <div data-identifier="question" class="question">
         <h3>${answers.data.questions[i].title}</h3>
         </div><div class ="answers"></div></div></div>`;
     }
@@ -106,13 +106,13 @@ function openQuizz(answers) {
 
             if (arrayAnswers[x].isCorrectAnswer) {
                 elementBoxes[i].innerHTML += `
-    <div class="answer${x+1} option true"  onclick="selectAnswer(this)">
+    <div data-identifier="answer" class="answer${x+1} option true"  onclick="selectAnswer(this)">
         <img src=${arrayAnswers[x].image}>
         <p>${arrayAnswers[x].text}</p>
     </div>`
             } else {
                 elementBoxes[i].innerHTML += `
-    <div class="answer${x+1} option false"  onclick="selectAnswer(this)">
+    <div data-identifier="answer" class="answer${x+1} option false"  onclick="selectAnswer(this)">
         <img src=${arrayAnswers[x].image}>
         <p>${arrayAnswers[x].text}</p>
     </div>`
@@ -393,8 +393,6 @@ function displayNivel(secao) {
     <input type="text" id="description${conter}" placeholder="Descrição do nível" />`
 }
 
-// não mexi nessa função mas será necessário por o sendquizz() aqui, fiquei receosa de por no local errado
-// testei usando console.log essa function e acredito que está dando erro por isso não consegui testar o post mas espero estar certo, amanhã acordo cedo para vermos isso
 
 function saveSection3() {
     let i = conter - 1;
@@ -478,7 +476,7 @@ function successQuizz(response) {
         localStorage.setItem("id", idSerial);
     }
     ids = response.data.id;
-    console.log(ids);
+
 
     let quizzCreated = axios.get('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/' + response.data.id);
     const endCreation = document.querySelector("#criarQuizzes .section4");
@@ -534,20 +532,6 @@ function openMyQuizz(ids) {
 
 
 }
-
-//reinicia e atualiza o servidor para voltar com a pagina 1 ja com o quiz recem feito
-
-// function reload() {
-//     const elementCreateQuiz = document.querySelector("#criarQuizzes .section4");
-//     const elementTelaInicio = document.getElementById("telaInicio");
-//     elementCreateQuiz.classList.add("hidden");
-//     elementTelaInicio.classList.remove("hidden");
-
-//     setTimeout(function(){
-//         document.location.reload(true);
-//     }, 1000);
-// }
-
 
 //tela de carregamento
 function carregando() {
